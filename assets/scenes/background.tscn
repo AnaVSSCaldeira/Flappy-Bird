@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckxc87w5irf8x"]
+
+[ext_resource type="Script" path="res://assets/scripts/background.gd" id="1_70fio"]
+[ext_resource type="Texture2D" uid="uid://byjuctcnq6de5" path="res://assets/background/background_day.png" id="1_hmeeq"]
+[ext_resource type="Texture2D" uid="uid://budtm6p35jy04" path="res://assets/background/floor.png" id="2_vl1fo"]
+[ext_resource type="PackedScene" uid="uid://vhf3xfn76eej" path="res://assets/scenes/pipe_spawner.tscn" id="3_om5l2"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = ExtResource("1_70fio")
+scenario_speed = 180
+scenario_texture = Array[String](["res://assets/background/background_day.png", "res://assets/background/background_night.png"])
+
+[node name="Background" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(288, 0)
+
+[node name="Texture" type="TextureRect" parent="Background"]
+texture_filter = 1
+offset_right = 288.0
+offset_bottom = 512.0
+texture = ExtResource("1_hmeeq")
+
+[node name="PipeSpawner" parent="." instance=ExtResource("3_om5l2")]
+
+[node name="Floor" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(288, 0)
+
+[node name="Texture" type="TextureRect" parent="Floor"]
+texture_filter = 1
+offset_right = 288.0
+offset_bottom = 512.0
+texture = ExtResource("2_vl1fo")

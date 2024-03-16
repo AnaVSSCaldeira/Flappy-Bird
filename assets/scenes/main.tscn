@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://chgymoe5r7lbu"]
+
+[ext_resource type="Script" path="res://assets/scripts/main.gd" id="1_2rlqs"]
+[ext_resource type="PackedScene" uid="uid://ckxc87w5irf8x" path="res://assets/scenes/background.tscn" id="1_gqkyi"]
+[ext_resource type="PackedScene" uid="uid://crr7rkpmtrjdp" path="res://assets/scenes/flappy_bird.tscn" id="2_srj30"]
+[ext_resource type="PackedScene" uid="uid://bc5r5yimv0ptr" path="res://assets/scenes/interface.tscn" id="4_10vvs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1tbt"]
+size = Vector2(288, 112)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_2rlqs")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_gqkyi")]
+
+[node name="Bird" parent="." instance=ExtResource("2_srj30")]
+position = Vector2(144, 230)
+
+[node name="Interface" parent="." instance=ExtResource("4_10vvs")]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(134, 442)
+
+[node name="Collision" type="CollisionShape2D" parent="Floor"]
+position = Vector2(10, 14)
+shape = SubResource("RectangleShape2D_v1tbt")

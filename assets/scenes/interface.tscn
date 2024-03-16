@@ -1,0 +1,166 @@
+[gd_scene load_steps=10 format=3 uid="uid://bc5r5yimv0ptr"]
+
+[ext_resource type="Texture2D" uid="uid://lwluaayaa0d4" path="res://assets/gui/message.png" id="1_fgmdq"]
+[ext_resource type="Script" path="res://assets/scripts/interface.gd" id="1_qoxma"]
+[ext_resource type="PackedScene" uid="uid://xa1mcxlh0uaq" path="res://assets/scenes/sfx.tscn" id="2_cuwex"]
+[ext_resource type="Texture2D" uid="uid://cyt88773c53l" path="res://assets/gui/gameover.png" id="2_rk3wl"]
+
+[sub_resource type="FontVariation" id="FontVariation_efb4v"]
+
+[sub_resource type="Animation" id="Animation_81rbh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation/Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_47jfh"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation/Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_435ff"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation/Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5kr3a"]
+_data = {
+"RESET": SubResource("Animation_81rbh"),
+"fade_in": SubResource("Animation_47jfh"),
+"fade_out": SubResource("Animation_435ff")
+}
+
+[node name="Interface" type="CanvasLayer" groups=["Interface"]]
+script = ExtResource("1_qoxma")
+sfx_scene = ExtResource("2_cuwex")
+
+[node name="MessageContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Message" type="Button" parent="MessageContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Texture" type="TextureRect" parent="MessageContainer/Message"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -133.5
+offset_right = 92.0
+offset_bottom = 133.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_fgmdq")
+
+[node name="GameOver" type="Button" parent="MessageContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Texture" type="TextureRect" parent="MessageContainer/GameOver"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -133.5
+offset_right = 92.0
+offset_bottom = 133.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rk3wl")
+stretch_mode = 2
+
+[node name="ScoreContainer" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Text" type="RichTextLabel" parent="ScoreContainer"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -38.0
+offset_right = 2.0
+offset_bottom = 40.0
+grow_horizontal = 2
+scale = Vector2(2.84524, 2.4062)
+theme_override_fonts/normal_font = SubResource("FontVariation_efb4v")
+theme_override_font_sizes/normal_font_size = 20
+text = " 0"
+scroll_active = false
+context_menu_enabled = true
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5kr3a")
+}
+
+[node name="Background" type="ColorRect" parent="Animation"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
